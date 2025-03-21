@@ -1,0 +1,11 @@
+#!/bin/sh
+PATH=$HOME/rockchip-linux/u-boot/scripts/dtc:$HOME/rockchip-linux/u-boot/tools:$PATH ; export PATH
+echo "Building resource.img"
+resource_tool --pack  \
+	--image=resource.img \
+	rk-kernel.dtb \
+	logo.bmp \
+	logo_kernel.bmp 
+echo "Building boot.img"
+mkimage -E -p 0x1000 -f boot.its pack/Image/boot.img
+

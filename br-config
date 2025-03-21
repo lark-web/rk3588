@@ -1,0 +1,7 @@
+#!/bin/sh
+make -C $HOME/buildroot   \
+	O=$PWD/output   \
+	nconfig
+#make -C $HOME/buildroot  \
+#	O=$PWD/output  \
+#	busybox-menuconfig	

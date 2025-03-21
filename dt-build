@@ -1,0 +1,13 @@
+#!/bin/sh
+echo preprocessing
+cpp  -nostdinc  \
+	-I$HOME/rockchip-linux/kernel/include  \
+	-I$HOME/rockchip-linux/kernel/arch/arm64/boot/dts  \
+	-I$HOME/rockchip-linux/kernel/arch/arm64/boot/dts/rockchip  \
+	-undef -x assembler-with-cpp   rk3588-orangepi-5-plus.dts  rk3588.dts    
+echo compiling
+kernel/scripts/dtc/dtc -I dts  -O dtb  \
+	-i $HOME/rockchip-linux/kernel/arch/arm64/boot/dts/rockchip  \
+	rk3588.dts \
+	-o rk-kernel.dtb 
+#rm -f rk3588.dts 

@@ -1,0 +1,23 @@
+#!/bin/sh
+GIT_DISCOVERY_ACROSS_FILESYSTEM=1 :export  GIT_DICOVERY_ACROSS_FILESYSTEM
+GIT_DIR=$HOME/rockchip-linux/kernel/.git ; export GIT_DIR
+make -C $HOME/rockchip-linux/kernel  \
+	O=$PWD/kernel  \
+	ARCH=arm64  \
+	linux_rockchip-rk3588-legacy. config  
+make -C $HOME/rockchip-linux/kernel  \
+	O=$PWD/kernel \
+	ARCH=arm64  \
+	CROSS_COMPILE=$PWD/output/host/bin/aarch64-rockchip-linux-gnu-  \
+	nconfig
+make -C $HOME/rockchip-linux/kernel  -j4  \
+	O=$PWD/kernel   \
+	ARCH=arm64  \
+	CROSS_COMPILE=$PWD/output/host/bin/aarch64-rockchip-linux-gnu- \
+	Image modules
+make -C $HOME/rockchip-linux/kernel   \
+	ARCH=arm64   \
+	CROSS_COMPILE=$PWD/output/host/bin/aarch64-rockchip-linux-gnu-   \
+	INSTALL_MOD_PATH=$PWD/rootfs_overlay  \
+	 modules_install  
+

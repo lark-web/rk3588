@@ -1,0 +1,5 @@
+#!/bin/sh
+make -C /home/lark/buildroot    \
+	O=$PWD/output  \
+	#!BR2_JLEVEL = "$(($(nproc)-2))"
+
